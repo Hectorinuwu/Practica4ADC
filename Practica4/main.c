@@ -1,8 +1,5 @@
 #include "lib/include.h"
 
-int adc_dataSS1[3]; // arreglos de enteros con 3 casillas para 3 canales
-int adc_dataSS2[3]; // arreglos de enteros con 3 casillas para 3 canales 
-
 int main(void)
 {
 
@@ -40,8 +37,10 @@ int main(void)
     }
 }
 
-extern void GPIOD_INT_ISR(void)
+extern void GPIOD_boton(void)
 {
+    int adc_dataSS1[3]; // arreglos de enteros con 3 casillas
+    int adc_dataSS2[3]; // arreglos de enteros con 3 casillas
     char num_char[16];
     if((GPIOD->RIS & (1<<7)) == (1<<7))
     { //SW1 GUARDA
@@ -53,13 +52,13 @@ extern void GPIOD_INT_ISR(void)
 
 //        writeString(UART_0,"ADC: ");
 
-//angel ocupa estas cosas xd
+//se ocupa esta debe activarse si se escogen otros canales 
         //ltoa(adc_dataSS3[0],num_char,10);
         //printString(num_char); //Imprimimos el valor del SS3
         //printChar(',');
 
 
-        enviarADCSS2SS1(adc_dataSS2); //Imprimimos el valor del SS2 comentar esta el angel xd
+        enviarADCSS2SS1(adc_dataSS2); //Imprimimos el valor del SS2 
         enviarADCSS2SS1(adc_dataSS1); //Imprimimos el valor del SS1
         printChar('\n');
     
